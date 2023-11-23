@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'MetaKeep'
-    spec.version                  = '2.0.1'
+    spec.version                  = '2.0.2-alpha'
     spec.homepage                 = 'https://metakeep.xyz'
     spec.source                   = {
         :git => 'https://github.com/PassbirdCo/MetaKeepSDK.git',
