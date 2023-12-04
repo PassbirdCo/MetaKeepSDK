@@ -188,6 +188,7 @@ __attribute__((swift_name("Environment")))
 @property (class, readonly) MetaKeepEnvironment *development __attribute__((swift_name("development")));
 @property (class, readonly) MetaKeepEnvironment *local __attribute__((swift_name("local")));
 + (MetaKeepKotlinArray<MetaKeepEnvironment *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<MetaKeepEnvironment *> *entries __attribute__((swift_name("entries")));
 @end
 
 __attribute__((swift_name("MetaKeepJsonObject")))
@@ -216,6 +217,7 @@ __attribute__((swift_name("MetaKeep")))
 - (instancetype)initWithAppId:(NSString *)appId appContext:(MetaKeepAppContext *)appContext __attribute__((swift_name("init(appId:appContext:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) MetaKeepMetaKeepCompanion *companion __attribute__((swift_name("companion")));
 - (void)getConsentConsentToken:(NSString *)consentToken callback:(MetaKeepCallback *)callback __attribute__((swift_name("getConsent(consentToken:callback:)")));
+- (void)getWalletCallback:(MetaKeepCallback *)callback __attribute__((swift_name("getWallet(callback:)")));
 - (void)signMessageMessage:(NSString *)message reason:(NSString *)reason callback:(MetaKeepCallback *)callback __attribute__((swift_name("signMessage(message:reason:callback:)")));
 - (void)signTransactionTransaction:(MetaKeepJsonRequest *)transaction reason:(NSString *)reason callback:(MetaKeepCallback *)callback __attribute__((swift_name("signTransaction(transaction:reason:callback:)")));
 - (void)signTypedDataTypedData:(MetaKeepJsonRequest *)typedData reason:(NSString *)reason callback:(MetaKeepCallback *)callback __attribute__((swift_name("signTypedData(typedData:reason:callback:)")));
@@ -243,7 +245,6 @@ __attribute__((swift_name("User")))
 @interface MetaKeepUser : MetaKeepBase
 - (instancetype)initWithEmail:(NSString *)email __attribute__((swift_name("init(email:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) MetaKeepUserCompanion *companion __attribute__((swift_name("companion")));
-- (NSString *)component1 __attribute__((swift_name("component1()"))) __attribute__((deprecated("use corresponding property instead")));
 - (MetaKeepUser *)doCopyEmail:(NSString *)email __attribute__((swift_name("doCopy(email:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
@@ -288,11 +289,16 @@ __attribute__((swift_name("KotlinArray")))
 
 __attribute__((swift_name("KotlinThrowable")))
 @interface MetaKeepKotlinThrowable : MetaKeepBase
-- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithCause:(MetaKeepKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(MetaKeepKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithMessage:(NSString * _Nullable)message cause:(MetaKeepKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+
+/**
+ * @note annotations
+ *   kotlin.experimental.ExperimentalNativeApi
+*/
 - (MetaKeepKotlinArray<NSString *> *)getStackTrace __attribute__((swift_name("getStackTrace()")));
 - (void)printStackTrace __attribute__((swift_name("printStackTrace()")));
 - (NSString *)description __attribute__((swift_name("description()")));
